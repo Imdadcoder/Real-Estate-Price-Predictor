@@ -28,6 +28,11 @@ def predict_home_price():
 
     return response
 
+@app.route('/')
+def index():
+    return "🏠 Bangalore Home Price Prediction API is running successfully!"
+
+
 
 if __name__ == "__main__":
     import os
