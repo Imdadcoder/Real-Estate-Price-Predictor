@@ -1,16 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import util
 import os
-from flask_cors import CORS
 
-
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__, static_folder='../Client', template_folder='../Client')
 CORS(app)
 
-
-
 @app.route('/')
-def index():
+def home():
     return render_template('app.html')
 
 @app.route('/get_location_names', methods=['GET'])
@@ -23,22 +20,22 @@ def get_location_names():
 
 @app.route('/predict_home_price', methods=['POST'])
 def predict_home_price():
-    total_sqft = float(request.form['total_sqft'])
-    location = request.form['location']
-    bhk = int(request.form['bhk'])
-    bath = int(request.form['bath'])
+    data = request.form
+    total_sqft = float(data['total_sqft'])
+    location = data['location']
+    bhk = int(data['bhk'])
+    bath = int(data['bath'])
 
     response = jsonify({
         'estimated_price': util.get_estimated_price(location, total_sqft, bhk, bath)
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
-
     return response
 
-
-
 if __name__ == "__main__":
-    print("✅ Starting Flask Server for Bangalore Home Price Prediction...")
+    print("🏠 Starting Python Flask Server for Home Price Prediction...")
     util.load_saved_artifacts()
-    port = int(os.environ.get("PORT", 5000))  
+
+    # Use the PORT Render provides or default to 5000 for local
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
