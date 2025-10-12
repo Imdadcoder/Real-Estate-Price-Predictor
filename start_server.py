@@ -4,6 +4,11 @@ Startup script for Bangalore Home Prices prediction service
 """
 import os
 import sys
+
+# Add Server directory to Python path
+server_dir = os.path.join(os.path.dirname(__file__), 'Server')
+sys.path.insert(0, server_dir)
+
 from Server.server import app
 
 if __name__ == "__main__":

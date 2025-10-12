@@ -34,7 +34,7 @@ If you prefer manual setup:
 1. **Service Type**: Web Service
 2. **Environment**: Python 3
 3. **Build Command**: `pip install -r requirements.txt`
-4. **Start Command**: `gunicorn --bind 0.0.0.0:$PORT Server.server:app`
+4. **Start Command**: `cd Server && gunicorn --bind 0.0.0.0:$PORT server:app`
 5. **Python Version**: 3.11.0
 
 ### Important Notes for Deployment
@@ -43,6 +43,7 @@ If you prefer manual setup:
 - The application automatically detects the correct path for model files
 - CORS is enabled for cross-origin requests
 - The app runs on the port provided by Render's environment variable
+- **Fixed Import Issue**: The server now properly handles imports on Render deployment
 
 ### Troubleshooting
 
