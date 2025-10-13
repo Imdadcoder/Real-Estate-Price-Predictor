@@ -8,7 +8,8 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return render_template('app.html')
+    return "🏠 Bangalore Home Price Prediction API is running successfully!"
+
 
 @app.route('/get_location_names', methods=['GET'])
 def get_location_names():
