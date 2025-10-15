@@ -3,12 +3,16 @@ from flask_cors import CORS
 import util
 import os
 
+
 app = Flask(__name__, static_folder='../Client', template_folder='../Client')
 CORS(app)
+
+
 
 @app.route('/')
 def home():
     return "🏠 Bangalore Home Price Prediction API is running successfully!"
+
 
 
 @app.route('/get_location_names', methods=['GET'])
@@ -18,6 +22,8 @@ def get_location_names():
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+
+
 
 @app.route('/predict_home_price', methods=['POST'])
 def predict_home_price():
@@ -33,10 +39,12 @@ def predict_home_price():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
+
 if __name__ == "__main__":
     print("🏠 Starting Python Flask Server for Home Price Prediction...")
     util.load_saved_artifacts()
 
-    # Use the PORT Render provides or default to 5000 for local
+    
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
