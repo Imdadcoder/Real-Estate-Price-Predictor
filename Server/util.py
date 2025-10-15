@@ -35,11 +35,15 @@ def load_saved_artifacts():
     global __model
 
     
-    base_dir = os.path.dirname(__file__)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
 
     
-    model_path = os.path.join(base_dir, '../Model/bangalore_home_prices_model.pickle')
-    columns_path = os.path.join(base_dir, '../Model/columns.json')
+    model_path = os.path.join(base_dir, '..', 'Model', 'bangalore_home_prices_model')
+    columns_path = os.path.join(base_dir, '..', 'Model', 'columns.json')
+
+    
+    print(f"Model path: {model_path}")
+    print(f"Columns path: {columns_path}")
 
     
     with open(columns_path, 'r') as f:
@@ -53,4 +57,7 @@ def load_saved_artifacts():
     print("loading saved artifacts...done")
 
 
-
+if __name__ == '__main__':
+    load_saved_artifacts()
+    print(get_location_names())
+    print(get_estimated_price('1st Phase JP nagar', 1000, 3, 3))
